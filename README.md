@@ -1,7 +1,7 @@
 <table>
   <tr>   
     <td>
-      <img src="https://github.com/NEO849/NeoVimExplorer/blob/main/neovimexapplogo.png?raw=true" alt="NeoVimExplorer Icon" width="150" />
+      <img src="media/neovimexapplogo.png?raw=true" alt="NeoVimExplorer Icon" width="150" />
     </td>
     <td>
       <h1 style="color: #00bfa6;">NeoVimExplorer</h1>
@@ -22,9 +22,9 @@
 ## ![Design / Screenshots](https://img.shields.io/badge/Design-%2300bfa6?style=for-the-badge&logo=none)
 
 <div>
-  <img src="https://github.com/NEO849/NeoVimExplorer/blob/main/neovimexdummy1.png?raw=true" width="30%" />
-  <img src="https://github.com/NEO849/NeoVimExplorer/blob/main/neovimexdummy2.png?raw=true" width="30%" />
-  <img src="https://github.com/NEO849/NeoVimExplorer/blob/main/neovimexdummy3.png?raw=true" width="30%" />
+  <img src="media/neovimexdummy1.png?raw=true" width="30%" />
+  <img src="media/neovimexdummy2.png?raw=true" width="30%" />
+  <img src="media/neovimexdummy3.png?raw=true" width="30%" />
 </div>
 
 ---
