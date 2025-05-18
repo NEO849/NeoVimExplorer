@@ -1,0 +1,119 @@
+
+# ==========================================================
+# Universelle .gitignore für Xcode/macOS/iOS Projekte
+# Für SwiftUI, UIKit, SPM, CocoaPods, Carthage & Tools
+# ==========================================================
+
+# ----------------------
+# macOS generierte Dateien
+# ----------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+.Trashes
+.Spotlight-V100
+.AppleSearchMetadata/
+._*
+
+# ----------------------
+# Xcode generierte Dateien
+# ----------------------
+build/
+DerivedData/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xccheckout
+*.xcuserstate
+*.xcscmblueprint
+
+# Benutzerbezogene Xcode-Dateien (lokal, nicht gemeinsam nutzbar)
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# Swift Package Manager
+.swiftpm/
+.build/
+Package.resolved
+
+# Xcode Preview Cache
+*.xcpreview
+
+# Swift Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# ----------------------
+# UIKit / Interface Builder
+# ----------------------
+*.moved-aside
+*.storyboardc
+
+# ----------------------
+# CocoaPods
+# ----------------------
+Pods/
+Podfile.lock
+
+# ----------------------
+# Carthage
+# ----------------------
+Carthage/
+Carthage/Build/
+
+# ----------------------
+# fastlane
+# ----------------------
+fastlane/report.xml
+fastlane/screenshots/
+fastlane/test_output/
+fastlane/*.log
+
+# ----------------------
+# Firebase / GoogleService config
+# (Ignorieren, wenn sensible Daten lokal bleiben sollen)
+# ----------------------
+# GoogleService-Info.plist
+
+# ----------------------
+# Systemeigene temporäre Dateien
+# ----------------------
+*.swp
+*.swo
+*~
+*.tmp
+
+# ----------------------
+# Terminal & Shell-Dateien
+# ----------------------
+.zsh_history
+.zsh_sessions/
+.zcompdump*
+.bash_history
+.bash_sessions/
+
+# ----------------------
+# Visual Studio Code / JetBrains / andere IDEs
+# ----------------------
+.vscode/
+.idea/
+*.code-workspace
+
+# ----------------------
+# JSON-Log oder temporäre Dump-Dateien
+# ----------------------
+*.log
+*.out
+*.json
+
+# ----------------------
+# Sonstige temporäre Ordner
+# ----------------------
+*.bak
+*.orig
+backup/
+temp/
+tmp/
