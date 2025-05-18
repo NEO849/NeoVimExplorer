@@ -44,6 +44,14 @@
 
 ---
 
+## ![Projektdiagramm](https://img.shields.io/badge/Projektdiagramm-%2300bfa6?style=for-the-badge&logo=none)
+
+<div>
+  <img src="media/neovimexdiagramm.png?raw=true" width="30%" />
+</div>
+
+---
+
 ## ![Projektstruktur](https://img.shields.io/badge/Projektstruktur-%2300bfa6?style=for-the-badge&logo=none)
 
 ```mermaid
