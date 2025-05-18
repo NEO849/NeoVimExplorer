@@ -13,7 +13,7 @@
 ![Swift](https://img.shields.io/badge/Swift-5.10-00bfa6?logo=swift&logoColor=black)
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-5.0-00bfa6?logo=swift&logoColor=black)
 ![iOS](https://img.shields.io/badge/iOS-17%2B-00bfa6?logo=apple&logoColor=black)
-![License](https://img.shields.io/badge/Lizenz-MIT-00bfa6?logo=open-source-initiative&logoColor=black)
+![License](https://img.shields.io/badge/Lizenz-CCO_1.0-00bfa6?logo=open-source-initiative&logoColor=black)
 
 **Datei-Explorer für iOS/macOS – mit Blur, Neon-Themes, CLI & Editor.**
 
