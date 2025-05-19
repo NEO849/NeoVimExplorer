@@ -11,7 +11,7 @@ import Foundation
 struct StorageInfo: Identifiable {
     let id = UUID()
     let category: StorageCategory
-    let usedSpaceGb: Double                 // Belegter Speicher in GB
+    let usedSpaceInGb: Double                 // Belegter Speicher in GB
 }
 
 /// Aufteilung des belegten Speichers in logische Kategorien.
