@@ -8,16 +8,13 @@
 import Foundation
 import UIKit
 
-/// Laden von Dateien aus dem Dateisystem und die Berechnung des Speicherplatzes.
+/// Zentrale Datenquelle. Laden von Dateien aus dem Dateisystem und die Berechnung des Speicherplatzes.
 class FileRepository {
-    /// Singleton-Instanz,  nur eine Instanz dieser Klasse im gesamten Programm.
-    static let shared = FileRepository()
-
-    /// FileManager ermöglicht die Interaktion mit dem Dateisystem.
-    private let fileManager = FileManager.default
+    
+    static let shared = FileRepository() // Singleton-Instanz
+    private let fileManager = FileManager.default // Interaktion mit dem Dateisystem
 
     /// Lädt alle Dateien und Ordner aus dem Dokumentenverzeichnis des Benutzers.
-    ///
     /// - Returns: Ein Array von `FileItem`-Objekten, die Informationen über jede gefundene Datei oder jeden Ordner enthalten.
     func fetchFiles() -> [FileItem] {
         // Ermittelt die URL des Dokumentenverzeichnisses des Benutzers.
@@ -27,7 +24,7 @@ class FileRepository {
         }
 
         do {
-            // Liest den Inhalt des Dokumentenverzeichnisses und fragt nach den Eigenschaften Dateigröße und Änderungsdatum.
+            // Liest den Inhalt des Dokumentenverzeichnisses. Eigenschaften - Dateigröße und Änderungsdatum ermitteln.
             let fileURLs = try fileManager.contentsOfDirectory(
                 at: documentsURL,
                 includingPropertiesForKeys: [.fileSizeKey, .contentModificationDateKey],
@@ -37,13 +34,13 @@ class FileRepository {
             // Wandelt die Array von Datei-URLs in ein Array von `FileItem`-Objekten um. Versucht, die Eigenschaften abzurufen.
             return fileURLs.map { url in
                 let attributes = try? fileManager.attributesOfItem(atPath: url.path)
-                // Erstellt ein `FileItem`-Objekt mit den extrahierten Informationen.
+                // `FileItem`-Objekt erstellen, Informationen extrahieren.
                 return FileItem(
                     id: UUID(),
                     name: url.lastPathComponent,
                     path: url.path,
                     isFolder: (attributes?[.type] as? FileAttributeType) == .typeDirectory,
-                    sizeKb: (attributes?[.size] as? Int).map { $0 / 1024 }, // Ruft die Größe in Bytes ab und konvertiert sie in Kilobyte.
+                    sizeKb: (attributes?[.size] as? Int).map { $0 / 1024 }, // Bytes größe abrufen und in Kilobyte konvertieren.
                     modifiedDate: attributes?[.modificationDate] as? Date
                 )
             }
@@ -54,10 +51,9 @@ class FileRepository {
     }
 
     /// Liefert eine vereinfachte Analyse des belegten Speicherplatzes auf dem Gerät.
-    ///
     /// - Returns: Ein Array von `StorageInfo`-Objekten, die Kategorien und den ungefähren belegten Speicherplatz in Gigabyte darstellen.
     func fetchStorageInfo() -> [StorageInfo] {
-        // Versucht, Speicherkapazität und den verfügbaren freien Speicherplatzdes Geräts abzurufen.
+        // Speicherkapazität und den verfügbaren freien Speicherplatzes abzurufen.
         let totalSpace = try? URL(fileURLWithPath: NSHomeDirectory() as String).resourceValues(forKeys: [.volumeTotalCapacityKey]).volumeTotalCapacity
         let freeSpace = try? URL(fileURLWithPath: NSHomeDirectory() as String).resourceValues(forKeys: [.volumeAvailableCapacityKey]).volumeAvailableCapacity
 
@@ -70,14 +66,14 @@ class FileRepository {
         // Die Prozentwerte (0.4, 0.3, 0.2, 0.1) sind Schätzungen und können je nach Gerät und Nutzung variieren.
         return [
             .init(category: .apps, usedSpaceInGb: Double(used) * 0.4 / 1_000_000_000), // Schätzt den Speicherverbrauch von Apps.
-            .init(category: .fotos, usedSpaceInGb: Double(used) * 0.3 / 1_000_000_000), // Schätzt den Speicherverbrauch von Fotos.
-            .init(category: .dokumente, usedSpaceInGb: Double(used) * 0.2 / 1_000_000_000), // Schätzt den Speicherverbrauch von Dokumenten.
-            .init(category: .andere, usedSpaceInGb: Double(used) * 0.1 / 1_000_000_000) // Schätzt den Speicherverbrauch für andere Dateitypen.
+            .init(category: .fotos, usedSpaceInGb: Double(used) * 0.3 / 1_000_000_000), // Fotos.
+            .init(category: .dokumente, usedSpaceInGb: Double(used) * 0.2 / 1_000_000_000), // Dokumenten.
+            .init(category: .andere, usedSpaceInGb: Double(used) * 0.1 / 1_000_000_000) // Dateitypen.
         ]
     }
 }
 
-// MARK: - Erweiterungen für Speicherinformationen auf UIDevice (optional, für bessere Lesbarkeit)
+// MARK: - Erweiterungen für Speicherinformationen auf UIDevice.
 
 extension UIDevice {
     /// Gibt die gesamte Speicherkapazität des Geräts in Bytes zurück.
