@@ -11,8 +11,8 @@ import Foundation
 struct Settings: Codable {
     var showHiddenFiles: Bool
     var blurEffectIntensity: Double       // Intensität des Blur-Effekts (0.0–1.0)
-    var layoutType: LayoutType            // Aktuelles Layout (Liste, Grid, Cards)
-    var theme: Theme                      // Ausgewähltes Theme für Hintergrund & Farben
+    var layoutType: LayoutType
+    var theme: Theme
 }
 
 /// Varianten für die Dateiansicht
