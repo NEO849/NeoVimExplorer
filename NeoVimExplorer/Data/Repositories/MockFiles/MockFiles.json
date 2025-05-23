@@ -1,0 +1,44 @@
+[
+  {
+    "id": "/mock/Documents/Projekt.swift",
+    "name": "Projekt.swift",
+    "isDirectory": false,
+    "size": 23128,
+    "modified": "2025-05-01T14:32:00Z"
+  },
+  {
+    "id": "/mock/Documents/Assets",
+    "name": "Assets",
+    "isDirectory": true,
+    "size": null,
+    "modified": "2025-04-25T09:15:00Z"
+  },
+  {
+    "id": "/mock/Documents/Readme.md",
+    "name": "Readme.md",
+    "isDirectory": false,
+    "size": 5823,
+    "modified": "2025-04-28T10:00:00Z"
+  },
+  {
+    "id": "/mock/Documents/Notes.txt",
+    "name": "Notes.txt",
+    "isDirectory": false,
+    "size": 1200,
+    "modified": "2025-05-20T11:30:00Z"
+  },
+  {
+    "id": "/mock/Documents/Images",
+    "name": "Images",
+    "isDirectory": true,
+    "size": null,
+    "modified": "2025-05-18T16:00:00Z"
+  },
+  {
+    "id": "/mock/Documents/Confidential.pdf",
+    "name": "Confidential.pdf",
+    "isDirectory": false,
+    "size": 150000,
+    "modified": "2025-05-15T09:45:00Z"
+  }
+]
