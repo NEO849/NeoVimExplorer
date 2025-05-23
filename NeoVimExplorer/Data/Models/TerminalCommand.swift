@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Ein Terminalbefehl in der CLI-Simulation
+///  Repräsentiert eine einzelne Terminal-Eingabe samt Ausgabe.
 struct TerminalCommand: Identifiable {
     let id = UUID()
     let input: String

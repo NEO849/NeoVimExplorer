@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Modell für benutzerspezifische App-Einstellungen.
+/// Modell für benutzerspezifische UI-Optionen (Theme, Layout, etc.)
 struct Settings: Codable {
     var showHiddenFiles: Bool
     var blurEffectIntensity: Double       // Intensität des Blur-Effekts (0.0–1.0)
@@ -15,12 +15,12 @@ struct Settings: Codable {
     var theme: Theme                      // Ausgewähltes Theme für Hintergrund & Farben
 }
 
-/// Auswahl an UI-Layouts
+/// Varianten für die Dateiansicht
 enum LayoutType: String, Codable, CaseIterable {
     case list, grid, cards
 }
 
-/// Auswahl an Farb-Themes (wie Neovim)
+/// Auswahl an Farb-Themes (wie Neovim – jeweils mit zugeordnetem Hintergrund)
 enum Theme: String, Codable, CaseIterable {
     case tokyoNight = "TokyoNight"
     case gruvbox = "Gruvbox"

@@ -13,6 +13,6 @@ struct FileItem: Identifiable, Codable {
     let name: String
     let path: String
     let isFolder: Bool
-    let sizeKb: Int?                       // Nur für Dateien
+    let size: UInt64?                       // Optional bei Ordnern
     let modifiedDate: Date?
 }

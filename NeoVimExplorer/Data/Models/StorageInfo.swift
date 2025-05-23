@@ -7,15 +7,22 @@
 
 import Foundation
 
-/// Struktur für Speicherinformationen zur Anzeige im Speicher-Diagramm.
-struct StorageInfo: Identifiable {
+/// Einzelne Speicher-Kategorie, z. B. Dokumente, Bilder etc.
+struct StorageCategory: Identifiable {
     let id = UUID()
+    let name: String
+    let usage: Double
+}
+
+/// Speicherinformationen zur Anzeige im Speicher bzw. Kreis-Diagramm.
+struct StorageInfo {
+    let total: UInt64
+    let usedSpaceInGb: UInt64
     let category: StorageCategory
-    let usedSpaceInGb: Double                 // Belegter Speicher in GB
 }
 
 /// Aufteilung des belegten Speichers in logische Kategorien.
-enum StorageCategory: String, CaseIterable {
+enum StorageCategories: String, CaseIterable {
     case dokumente = "Dokumente"
     case fotos = "Fotos"
     case apps = "Apps"
