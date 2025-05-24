@@ -5,43 +5,50 @@
 //  Created by Michael Fleps on 19.05.25.
 //
 
-import SwiftUI
+import Foundation
 
 /// Lädt Informationen mittels Singelton-FileRepo. Kümmerst sich um Logik für Dateiübersicht und Speicheranalyse.
 @Observable
 class ExplorerViewModel {
     
-    private let repository = FileRepository.shared
-    private let themeService = ThemeService()
-    var files: [FileItem] = []                            // Alle geladenen Dateien
-    var storageInfo: [StorageInfo] = []                   // Aktuelle Speicherinformationen
-    var searchQuery: String = ""                          // Text aus der Suchleiste
+    // MARK: - Abhaengigkeiten, Zugriff auf Dateien & Speicher
+    private let fileRepository = FileRepository()
 
-    // MARK: - Fuzzy Suche, Gefilterte Liste von Dateien basierend auf dem Suchtext.
-    var filteredFiles: [FileItem] {
-        guard !searchQuery.isEmpty else { return files }
-        return files.filter { $0.name.localizedCaseInsensitiveContains(searchQuery) }
+    // MARK: - Zustand
+    var files: [FileItem] = []
+    var storageInfo: StorageInfo?
+    var selectedFile: FileItem? = nil
+
+    // MARK: - Initialisierung
+    init() {
+        loadData()
     }
 
-    // MARK: - Informationen Laden
-
-    /// Lädt alle Dateien aus dem Dateisystem (z. B. aus dem Dokumente-Ordner).
-    func loadFiles() {
-        self.files = repository.fetchFiles()
+    // MARK: - Dateien und Speicherinfos anhand des Modus
+    func loadData() {
+        files = fileRepository.loadFiles()
+        storageInfo = fileRepository.loadStorageInfo()         
     }
 
-    /// Lädt die aktuellen Speicherinformationen.
-    func loadStorageInfo() {
-        self.storageInfo = repository.fetchStorageInfo()
+    /// Aktualisiert die aktuell ausgewählte Datei (Klick oder Tap).
+    func selectFile(_ file: FileItem?) {
+        selectedFile = file
     }
 
-    /// Gibt den aktuellen Hintergrundbild-Namen zurück (wird von View verwendet)
-    func backgroundImageName(for theme: Theme) -> String {
-        return themeService.backgroundImageName(for: theme)
-    }
-
-    /// Gibt eine Akzentfarbe für das aktive Theme zurück (z. B. für Icons, Texte)
-    func accentColor(for theme: Theme) -> Color {
-        return themeService.accentColor(for: theme)
+    /// Sucht rekursiv nach Dateien mit dem gegebenen Namen (einfache Textsuche).
+    func searchFiles(with keyword: String) -> [FileItem] {
+        func searchRecursive(_ items: [FileItem]) -> [FileItem] {
+            var results: [FileItem] = []
+            for item in items {
+                if item.name.lowercased().contains(keyword.lowercased()) {
+                    results.append(item)
+                }
+                if let children = item.children {
+                    results.append(contentsOf: searchRecursive(children))
+                }
+            }
+            return results
+        }
+        return searchRecursive(files)
     }
 }
