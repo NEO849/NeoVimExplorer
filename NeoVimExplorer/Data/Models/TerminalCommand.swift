@@ -7,9 +7,9 @@
 
 import Foundation
 
-///  Repräsentiert eine einzelne Terminal-Eingabe samt Ausgabe.
-struct TerminalCommand: Identifiable {
-    let id = UUID()
+///  Speichert einzelne Terminaleingaben mit Ausgabe.
+struct TerminalCommand: Identifiable, Codable {
+    var id = UUID()
     let input: String
     let output: String
     let timestamp: Date
