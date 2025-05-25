@@ -25,6 +25,14 @@ final class FileRepository {
         }
     }
     
+    func loadStorageInfo() -> StorageInfo {
+        if FileRepository.useMockData {
+            return loadMockStorage()
+        } else {
+            return loadRealStorage()
+        }
+    }
+    
     /// Lädt Dateien aus `MockFiles.json`
     private func loadMockFiles() -> [FileItem] {
         guard let url = Bundle.main.url(forResource: "MockFiles", withExtension: "json"),
@@ -77,15 +85,6 @@ final class FileRepository {
     }
     
     // MARK: - Speicher Infos je nach Modus
-    func loadStorageInfo() -> StorageInfo {
-        if FileRepository.useMockData {
-            return loadMockStorage()
-        } else {
-            return loadRealStorage()
-        }
-    }
-    
-    /// Lädt Speicher-Infos aus `MockStorage.json`.
     private func loadMockStorage() -> StorageInfo {
         guard let url = Bundle.main.url(forResource: "MockStorage", withExtension: "json", subdirectory: "Data/MockFiles"),
               let data = try? Data(contentsOf: url) else {
@@ -111,8 +110,8 @@ final class FileRepository {
         let totalGB = Double(total) / 1_000_000_000
         let usedGB = Double(used) / 1_000_000_000
         
-        // Berechnung der Prozente für jede Kategorie
-        let totalEstimatedUsed = usedGB // Hier nur usedGB als Basis, da es Schätzungen sind
+        //  Prozentberechnung pro Kategorie (Schätzungen).
+        let totalEstimatedUsed = usedGB // Hier nur us
         let appsUsage = totalEstimatedUsed * 0.4
         let picturesUsage = totalEstimatedUsed * 0.3
         let documentsUsage = totalEstimatedUsed * 0.2
@@ -134,7 +133,6 @@ final class FileRepository {
 }
 
 // MARK: - Erweiterungen für Speicherinformationen auf UIDevice.
-// Diese bleiben unverändert, da sie systemweite Informationen liefern.
 
 extension UIDevice {
     /// Gibt die gesamte Speicherkapazität des Geräts in Bytes zurück.
@@ -152,4 +150,12 @@ extension UIDevice {
         }
         return Int64(space)
     }
+    
+    var systemCapacity2: Int64 {
+        Int64((try? URL(fileURLWithPath: NSHomeDirectory()).resourceValues(forKeys: [.volumeTotalCapacityKey]).volumeTotalCapacity ?? 0) ?? 0)
+     }
+
+     var systemFreeSize2: Int64 {
+         Int64((try? URL(fileURLWithPath: NSHomeDirectory()).resourceValues(forKeys: [.volumeAvailableCapacityKey]).volumeAvailableCapacity ?? 0) ?? 0)
+     }
 }
