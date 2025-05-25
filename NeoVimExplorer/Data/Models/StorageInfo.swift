@@ -25,7 +25,10 @@ struct StorageCategory: Identifiable, Codable {
     var usagePercent: Double?
     var name: String { id.rawValue }
 
-    init(id: StorageCategoryType, usageInGB: Double, usagePercent: Double? = nil) {
+    init(
+        id: StorageCategoryType,
+        usageInGB: Double,
+        usagePercent: Double? = nil) {
         self.id = id
         self.usageInGB = usageInGB
         self.usagePercent = usagePercent
@@ -33,7 +36,8 @@ struct StorageCategory: Identifiable, Codable {
 }
 
 /// Gesamtspeicher-Informationen für die Anzeige und Auswertung und Aufteilung nach Kategorien.
-struct StorageInfo: Codable {
+struct StorageInfo: Identifiable, Codable {
+    var id = UUID()
     let totalInGB: Double
     let usedInGB: Double
     let categories: [StorageCategory]
