@@ -10,31 +10,49 @@ import Foundation
 /// Simuliert einfache CLI-Befehle wie in einem Neovim-Terminal.
 class TerminalService {
     
-    /// Führt einen Pseudo-Terminalbefehl aus und liefert die Ausgabe.
+    /// Führt einen Befehl aus und gibt die Antwort als Text zurück
     func execute(command: String) -> String {
-        switch command.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() {
-        case "ls":
-            return mockDirectoryListing()
-        case "pwd":
-            return FileManager.default.currentDirectoryPath
-        case "date":
-            return DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .medium)
-        case "help":
-            return """
-            Unterstützte Befehle:
-            - ls      : Zeige Dateiliste
-            - pwd     : Aktuelles Verzeichnis
-            - date    : Aktuelles Datum/Zeit
-            - help    : Diese Hilfe anzeigen
-            """
+        switch command {
+        case "la": return listDirectory()
+        case "pwd": return currentDirectory()
+        case "date": return currentDate()
+        case "help": return availableCommands()
         default:
-            return "❌ Unbekannter Befehl: \(command)"
+            return "❌ Befehl nicht erkannt. Gib 'help' ein."
         }
     }
 
-    /// Beispielausgabe für "ls"
-    private func mockDirectoryListing() -> String {
-        let exampleFiles = ["Dokumente", "Projekt.swift", "NeoExplorer.db", "README.md"]
-        return exampleFiles.joined(separator: "\n")
+    private func listDirectory() -> String {
+        let fm = FileManager.default
+        let url = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
+
+        do {
+            let items = try fm.contentsOfDirectory(atPath: url.path)
+            return items.joined(separator: "\n")
+        } catch {
+            return "⚠️ Fehler: \(error.localizedDescription)"
+        }
+    }
+
+    private func currentDirectory() -> String {
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        return url.path
+    }
+
+    private func currentDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        formatter.timeStyle = .short
+        return formatter.string(from: Date())
+    }
+
+    private func availableCommands() -> String {
+        return """
+        Unterstützte Befehle:
+        - la      → listet Dateien im Dokumentenordner
+        - pwd     → aktueller Pfad
+        - date    → aktuelles Datum
+        - help    → zeigt diese Hilfe
+        """
     }
 }
